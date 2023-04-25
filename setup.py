@@ -25,7 +25,7 @@ from ssm import __version__
 def main():
     """Called when run as script, e.g. 'python setup.py install'."""
     # Create temporary files with deployment names
-    if 'install' in sys.argv:
+    if False and 'install' in sys.argv:
         copyfile('bin/receiver.py', 'bin/ssmreceive')
         copyfile('bin/sender.py', 'bin/ssmsend')
         copyfile('scripts/apel-ssm.logrotate', 'conf/apel-ssm')
@@ -59,7 +59,13 @@ def main():
               'dirq': ['dirq'],
           },
           packages=find_packages(exclude=['bin', 'test']),
-          scripts=['bin/ssmreceive', 'bin/ssmsend'],
+          entry_points={
+              'console_scripts': [
+                  'ssmreceive=ssm.cmd.receiver:main',
+                  'ssmsend=ssm.cmd.sender:main',
+              ]
+          },
+          #scripts=['bin/ssmreceive', 'bin/ssmsend'],
           data_files=[(conf_dir, conf_files),
                       ('/etc/logrotate.d', ['conf/apel-ssm']),
                       ('/usr/share/doc/apel-ssm', ['apel-ssm']),
