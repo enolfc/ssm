@@ -474,6 +474,8 @@ class Ssm2(stomp.ConnectionListener):
                 continue
 
             text = self._outq.get(msgid)
+            if type(text) == bytes:
+                text = text.decode('utf8')
 
             if self._protocol == Ssm2.STOMP_MESSAGING:
                 # Then we are sending to a STOMP message broker.
