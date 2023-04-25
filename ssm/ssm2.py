@@ -614,7 +614,6 @@ class Ssm2(stomp.ConnectionListener):
             raise Ssm2Exception('Called start_connection() before a \
                     connection object was initialised.')
 
-        self._conn.start()
         self._conn.connect(wait=False)
 
         i = 0
