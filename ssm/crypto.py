@@ -307,7 +307,7 @@ def get_certificate_subject(certstring):
         log.error(error)
         raise CryptoException('Failed to get subject: %s' % error)
 
-    subject = subject.strip()[9:]  # remove 'subject= ' from the front
+    subject = subject.strip()[8:]  # remove 'subject=' from the front
     return subject
 
 
